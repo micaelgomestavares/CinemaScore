@@ -266,8 +266,8 @@ const api = {
     }
   },
 
-  fetchSerieSeasons: async (serieId: string, serieNumber: string) => {
-    const apiUrl = `${baseUrl}/tv/${serieId}/season/${serieNumber}?&language=pt-BR`;
+  fetchSerieSeasons: async (serieId: number, seasonNumber: number) => {
+    const apiUrl = `${baseUrl}/tv/${serieId}/season/${seasonNumber}?&language=pt-BR`;
 
     try {
       const response = await fetch(apiUrl, {

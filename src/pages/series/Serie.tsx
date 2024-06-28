@@ -1,10 +1,10 @@
+import TabsSection from "@/components/TabsSection";
 import BackdropSection from "@/components/backdrop-section";
 import BackdropSkeletonSection from "@/components/skeletons/BackdropSkeletonSection";
 import InfoSkeletonSection from "@/components/skeletons/InfoSkeletonSection";
 import SimilarSkeletonList from "@/components/skeletons/SimilarSkeletonList";
 import TabsSkeletonSection from "@/components/skeletons/TabsSkeletonSection";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import api from "@/services/api";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -52,6 +52,7 @@ const Serie: React.FC = () => {
         setSeriesInfo(infoData);
         setSeriesCredits(seriesCreditsData);
         setSeriesRecommended(seriesRecommendedData);
+
       } catch (error) {
         console.error("Error fetching series data: ", error);
       }
@@ -59,6 +60,8 @@ const Serie: React.FC = () => {
 
     fetchData();
   }, [id]);
+
+ 
 
   if (!seriesInfo) {
     return (
@@ -78,7 +81,7 @@ const Serie: React.FC = () => {
       <section className="mx-auto my-4 w-full max-w-6xl">
         <BackdropSection backdropPath={seriesInfo.backdrop_path} />
         <SeriesInfoSection seriesInfo={seriesInfo} />
-        <TabsSection seriesCredits={seriesCredits} seriesInfo={seriesInfo} />
+        <TabsSection seriesCredits={seriesCredits} seriesInfo={seriesInfo} CreditsTab={CreditsTab} />
         <SimilarSeriesSection seriesRecommended={seriesRecommended} />
       </section>
     </main>
@@ -102,39 +105,6 @@ const SeriesInfoSection: React.FC<{ seriesInfo: SeriesInfo }> = ({ seriesInfo })
         <p className="text-xs leading-5 text-muted-foreground md:text-sm md:leading-6">{seriesInfo.overview}</p>
       </article>
     </main>
-  </section>
-);
-
-const TabsSection: React.FC<{ seriesCredits: Credits | null; seriesInfo: SeriesInfo }> = ({ seriesCredits, seriesInfo }) => (
-  <section className="p-4">
-    <Tabs defaultValue="temporadas">
-      <TabsList>
-        <TabsTrigger value="temporadas">Temporadas</TabsTrigger>
-        <TabsTrigger value="elenco">Elenco</TabsTrigger>
-        <TabsTrigger value="equipe">Equipe</TabsTrigger>
-      </TabsList>
-      <TabsContent value="temporadas">
-        <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-5 max-lg:grid-cols-3">
-          {seriesInfo.seasons.map((season) => (
-            <div key={season.id} className="flex flex-col space-x-2 overflow-hidden rounded-md border bg-muted shadow">
-              <div className="relative flex w-full items-center justify-center overflow-hidden bg-background/50">
-                <img src={`https://image.tmdb.org/t/p/w500/${season.poster_path}`} alt={season.name} />
-              </div>
-              <div className="flex flex-col space-y-0 py-2">
-                <span className="text-sm">{season.name}</span>
-                <span className="text-xs text-muted-foreground">{season.episode_count} episódios</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </TabsContent>
-      <TabsContent value="elenco">
-        <CreditsTab credits={seriesCredits?.cast} type="character" />
-      </TabsContent>
-      <TabsContent value="equipe">
-        <CreditsTab credits={seriesCredits?.crew} type="job" />
-      </TabsContent>
-    </Tabs>
   </section>
 );
 

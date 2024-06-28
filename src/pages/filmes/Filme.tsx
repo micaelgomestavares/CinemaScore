@@ -114,8 +114,8 @@ const TabsSection: React.FC<{ movieCredits: MovieCredit | null, movieInfo: Movie
     <Tabs defaultValue="boxoffice">
       <TabsList>
         <TabsTrigger value="boxoffice">Bilheteria</TabsTrigger>
-        <TabsTrigger value="elenco">Elenco</TabsTrigger>
-        <TabsTrigger value="equipe">Equipe</TabsTrigger>
+        <TabsTrigger value="elenco">Elenco ({movieCredits?.cast.length})</TabsTrigger>
+        <TabsTrigger value="equipe">Equipe ({movieCredits?.crew.length})</TabsTrigger>
       </TabsList>
       <TabsContent value="boxoffice">
         <BoxOfficeTab budget={movieInfo.budget} revenue={movieInfo.revenue} />
