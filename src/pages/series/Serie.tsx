@@ -162,7 +162,7 @@ const SimilarSeriesSection: React.FC<{ seriesRecommended: RecommendedSeries[] | 
     </div>
     <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-5 max-lg:grid-cols-3 mt-4">
       {seriesRecommended?.map((serieRecommend) => (
-        <div key={serieRecommend.id} className="flex flex-col space-x-2 overflow-hidden rounded-md shadow">
+        <div key={serieRecommend.id} className="flex flex-col space-x-2 overflow-hidden shadow bg-secondary rounded-md">
           <a href={`/series/${serieRecommend.id}`}>
             <div className="relative flex w-full items-center justify-center overflow-hidden bg-background/50">
               <img src={`https://image.tmdb.org/t/p/w500/${serieRecommend.poster_path}`} alt={serieRecommend.name} />

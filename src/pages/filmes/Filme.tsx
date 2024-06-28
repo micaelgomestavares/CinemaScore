@@ -131,7 +131,7 @@ const TabsSection: React.FC<{ movieCredits: MovieCredit | null, movieInfo: Movie
 );
 
 const BoxOfficeTab: React.FC<{ budget: number; revenue: number }> = ({ budget, revenue }) => (
-  <div className="flex flex-col gap-2">
+  <div className="flex flex-col gap-2 bg-secondary p-4 rounded-md">
     <h1 className="text-lg font-bold md:text-4xl">Bilheteria</h1>
     <h3>Orçamento: {budget.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h3>
     <h3>Faturamento: {revenue.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h3>
@@ -162,7 +162,7 @@ const SimilarMoviesSection: React.FC<{ movieSimilars: MovieSimilar[] | null }> =
     </div>
     <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-5 max-lg:grid-cols-3 mt-4">
       {movieSimilars && movieSimilars.map((movieSimilar) => (
-        <div key={movieSimilar.id} className="flex flex-col space-x-2 overflow-hidden rounded-md shadow">
+        <div key={movieSimilar.id} className="flex flex-col space-x-2 overflow-hidden shadow bg-secondary rounded-md">
           <a href={`/filmes/${movieSimilar.id}`}>
             <div className="relative flex w-full items-center justify-center overflow-hidden bg-background/50">
               <img src={`https://image.tmdb.org/t/p/w500/${movieSimilar.poster_path}`} alt={movieSimilar.title} />
