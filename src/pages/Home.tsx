@@ -1,3 +1,4 @@
+import SearchComponent from "@/components/search";
 import FilmesPopulares from "./filmes/Populares";
 
 const Home: React.FC<{}> = () => {
@@ -7,6 +8,9 @@ const Home: React.FC<{}> = () => {
         <div className="mb-4 p-4">
           <h1 className="text-lg font-bold md:text-4xl">Ínicio</h1>
           <p className="text-xs leading-5 text-muted-foreground md:text-sm md:leading-6">Veja o que está acontecendo no mundo dos filmes e séries</p>
+        </div>
+        <div className="my-4">
+          <SearchComponent></SearchComponent>
         </div>
         <div
           className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm p-4"

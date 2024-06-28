@@ -16,6 +16,7 @@ import React, { useEffect, useState } from "react";
 import api from "@/services/api";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import SearchComponent from "./search";
 
 export function Navbar() {
   const [popularMovieInfo, setPopularMovieInfo] = useState<any | null>(null);
@@ -108,11 +109,13 @@ export function Navbar() {
                       </ul>
                     </NavigationMenuContent>
                   </NavigationMenuItem>
+
                 </NavigationMenuList>
               </NavigationMenu>
             </div>
 
             <div className="flex items-center gap-2">
+              <SearchComponent></SearchComponent>
               <Link to="https://github.com/micaelgomestavares" target="_blank" rel="noreferrer">
                 <div className={cn(buttonVariants({ variant: "ghost" }), "w-10 px-0")}>
                   <GithubIcon className="h-[1.2rem] w-[1.2rem]" />
@@ -134,8 +137,9 @@ export function Navbar() {
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle navigation menu</span>
               </Button>
-              
+
             </SheetTrigger>
+
             <SheetContent aria-description="Mobile Navbar" side="left" className="flex flex-col">
               <DialogTitle></DialogTitle>
               <nav className="grid gap-2 text-lg font-medium">
@@ -147,7 +151,7 @@ export function Navbar() {
                     <Clapperboard className="mr-2" size={16} strokeWidth={1.25} absoluteStrokeWidth /> Filmes
                   </span>
                   <ul className="ml-4">
-                    
+
                     <li>
                       <Link to="/filmes/populares" className="block select-none p-3 no-underline outline-none">
                         🤩 Populares
@@ -170,7 +174,7 @@ export function Navbar() {
                     <MonitorPlay className="mr-2" size={16} strokeWidth={1.25} absoluteStrokeWidth /> Séries
                   </span>
                   <ul className="ml-4">
-                   
+
                     <li>
                       <Link to="/series/populares" className="block select-none p-3 no-underline outline-none">
                         🤩 Populares
@@ -191,6 +195,7 @@ export function Navbar() {
               </nav>
             </SheetContent>
           </Sheet>
+          <SearchComponent></SearchComponent>
         </header>
       </div>
     </>

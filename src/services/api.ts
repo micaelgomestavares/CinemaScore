@@ -1,9 +1,9 @@
-const { VITE_TMDB_API_KEY, VITE_TMDB_BEARER } = import.meta.env;
+const { VITE_TMDB_BEARER } = import.meta.env;
 const baseUrl = 'https://api.themoviedb.org/3';
 
 const api = {
   fetchSeriesInfoById: async (seriesId: string) => {
-    const apiUrl = `${baseUrl}/tv/${seriesId}?api_key=${VITE_TMDB_API_KEY}&language=pt-BR`;
+    const apiUrl = `${baseUrl}/tv/${seriesId}?&language=pt-BR`;
 
     try {
       const response = await fetch(apiUrl, {
@@ -21,8 +21,43 @@ const api = {
     }
   },
 
+  fetchMoviesByQuery: async (query: string) => {
+    const apiUrl = `${baseUrl}/search/movie?query=${query}&language=pt-BR`;
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${VITE_TMDB_BEARER}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching movie data:', error);
+    }
+  },
+
+  fetchSeriesByQuery: async (query: string) => {
+    const apiUrl = `${baseUrl}/search/tv?query=${query}&language=pt-BR`;
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${VITE_TMDB_BEARER}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching series data:', error);
+    }
+  },
+
   fetchMoviesInfoById: async (movieId: string) => {
-    const apiUrl = `${baseUrl}/movie/${movieId}?&api_key=${VITE_TMDB_API_KEY}&language=pt-BR`;
+    const apiUrl = `${baseUrl}/movie/${movieId}?&&language=pt-BR`;
 
     try {
       const response = await fetch(apiUrl, {
@@ -42,7 +77,7 @@ const api = {
   },
 
   fetchPopularMovies: async () => {
-    const apiUrl = `${baseUrl}/discover/movie?api_key=${VITE_TMDB_API_KEY}&language=pt-BR`;
+    const apiUrl = `${baseUrl}/discover/movie?&language=pt-BR`;
 
     try {
       const response = await fetch(apiUrl, {
@@ -60,8 +95,8 @@ const api = {
     }
   },
 
-  fetchBestRatedMovies: async (page =  1) => {
-    const apiUrl = `${baseUrl}/movie/top_rated?api_key=${VITE_TMDB_API_KEY}&language=pt-BR&page=${page}`;
+  fetchBestRatedMovies: async (page = 1) => {
+    const apiUrl = `${baseUrl}/movie/top_rated?&language=pt-BR&page=${page}`;
 
     try {
       const response = await fetch(apiUrl, {
@@ -80,8 +115,8 @@ const api = {
   },
 
   fetchBestRatedSeries: async (page = 1) => {
-    const apiUrl = `${baseUrl}/tv/top_rated?api_key=${VITE_TMDB_API_KEY}&language=pt-BR&page=${page}`;
-  
+    const apiUrl = `${baseUrl}/tv/top_rated?&language=pt-BR&page=${page}`;
+
     try {
       const response = await fetch(apiUrl, {
         method: 'GET',
@@ -97,9 +132,9 @@ const api = {
       return [];
     }
   },
-  
+
   fetchUpcomingMovies: async () => {
-    const apiUrl = `${baseUrl}/movie/upcoming?api_key=${VITE_TMDB_API_KEY}`;
+    const apiUrl = `${baseUrl}/movie/upcoming?`;
 
     try {
       const response = await fetch(apiUrl, {
@@ -118,7 +153,7 @@ const api = {
   },
 
   fetchUpcomingSeries: async () => {
-    const apiUrl = `${baseUrl}/tv/on_the_air?api_key=${VITE_TMDB_API_KEY}&language=pt-BR`;
+    const apiUrl = `${baseUrl}/tv/on_the_air?&language=pt-BR`;
 
     try {
       const response = await fetch(apiUrl, {
@@ -137,7 +172,7 @@ const api = {
   },
 
   fetchPopularSeries: async () => {
-    const apiUrl = `${baseUrl}/tv/popular?api_key=${VITE_TMDB_API_KEY}&language=pt-BR`;
+    const apiUrl = `${baseUrl}/tv/popular?&language=pt-BR`;
 
     try {
       const response = await fetch(apiUrl, {
@@ -156,7 +191,7 @@ const api = {
   },
 
   fetchRecommendedMovies: async (movieId: string) => {
-    const apiUrl = `${baseUrl}/movie/${movieId}/recommendations?api_key=${VITE_TMDB_API_KEY}&language=pt-BR`;
+    const apiUrl = `${baseUrl}/movie/${movieId}/recommendations?&language=pt-BR`;
 
     try {
       const response = await fetch(apiUrl, {
@@ -175,7 +210,7 @@ const api = {
   },
 
   fetchRecommendedSeries: async (seriesId: string) => {
-    const apiUrl = `${baseUrl}/tv/${seriesId}/recommendations?api_key=${VITE_TMDB_API_KEY}&language=pt-BR`;
+    const apiUrl = `${baseUrl}/tv/${seriesId}/recommendations?&language=pt-BR`;
 
     try {
       const response = await fetch(apiUrl, {
@@ -194,7 +229,7 @@ const api = {
   },
 
   fetchMoviesCredits: async (movieId: string) => {
-    const apiUrl = `${baseUrl}/movie/${movieId}/credits?api_key=${VITE_TMDB_API_KEY}&language=pt-BR`;
+    const apiUrl = `${baseUrl}/movie/${movieId}/credits?&language=pt-BR`;
 
     try {
       const response = await fetch(apiUrl, {
@@ -213,7 +248,7 @@ const api = {
   },
 
   fetchSeriesCredits: async (serieId: string) => {
-    const apiUrl = `${baseUrl}/tv/${serieId}/aggregate_credits?api_key=${VITE_TMDB_API_KEY}&language=pt-BR`;
+    const apiUrl = `${baseUrl}/tv/${serieId}/aggregate_credits?&language=pt-BR`;
 
     try {
       const response = await fetch(apiUrl, {
@@ -232,7 +267,7 @@ const api = {
   },
 
   fetchSerieSeasons: async (serieId: string, serieNumber: string) => {
-    const apiUrl = `${baseUrl}/tv/${serieId}/season/${serieNumber}?api_key=${VITE_TMDB_API_KEY}&language=pt-BR`;
+    const apiUrl = `${baseUrl}/tv/${serieId}/season/${serieNumber}?&language=pt-BR`;
 
     try {
       const response = await fetch(apiUrl, {
