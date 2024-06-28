@@ -14,6 +14,7 @@ import Serie from "./pages/series/Serie"
 import SeriesPopulares from "./pages/series/Populares"
 import SeriesMelhoresAvaliadas from "./pages/series/Melhores-Avaliados"
 import SeriesEstreias from "./pages/series/Estreias"
+import Pessoas from "./pages/pessoas/Pessoas"
 
 function App() {
   return (
@@ -33,6 +34,9 @@ function App() {
             <Route path="estreias" element={<SeriesEstreias />} />
             <Route path="melhores-avaliados" element={<SeriesMelhoresAvaliadas />} />
             <Route path=":id" element={<Serie />} />
+          </Route>
+          <Route path="pessoas">
+            <Route path=":id" element={<Pessoas />} />
           </Route>
           <Route path="*" element={<Home />} />
         </Routes>

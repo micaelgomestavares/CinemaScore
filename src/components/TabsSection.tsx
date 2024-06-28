@@ -61,7 +61,7 @@ const TabsSection: React.FC<{ seriesCredits: any | null; seriesInfo: any; Credit
                               />
                               <div className="flex flex-col space-y-2">
                                 <span className="font-semibold">{index + 1}. {episode.name}  <Badge variant={'topEpisode'}>⭐ {episode.vote_average.toPrecision(2)}</Badge></span>
-                                <span className="text-xs text-muted-foreground"> ({new Date(episode.air_date).toLocaleDateString('pt-br')})</span>
+                                <span className="text-xs text-muted-foreground"> ({new Date(episode.air_date).toLocaleDateString('pt-br')}) - {episode.runtime} min</span>
                                 <p className="text-sm">{episode.overview}</p>
                               </div>
                             </div>

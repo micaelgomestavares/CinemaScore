@@ -95,6 +95,44 @@ const api = {
     }
   },
 
+  fetchPersonById: async (person_id: string) => {
+    const apiUrl = `${baseUrl}/person/${person_id}?language=pt-BR`;
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${VITE_TMDB_BEARER}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching movie data:', error);
+      return null;
+    }
+  },
+
+  fetchPersonCast: async (person_id: string) => {
+    const apiUrl = `${baseUrl}/person/${person_id}/combined_credits?language=pt-BR`;
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${VITE_TMDB_BEARER}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching movie data:', error);
+      return null;
+    }
+  },
+
   fetchBestRatedMovies: async (page = 1) => {
     const apiUrl = `${baseUrl}/movie/top_rated?&language=pt-BR&page=${page}`;
 

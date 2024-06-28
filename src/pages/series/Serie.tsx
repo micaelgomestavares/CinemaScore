@@ -7,7 +7,7 @@ import TabsSkeletonSection from "@/components/skeletons/TabsSkeletonSection";
 import { Badge } from "@/components/ui/badge";
 import api from "@/services/api";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export interface SeriesInfo {
   id: string;
@@ -61,7 +61,7 @@ const Serie: React.FC = () => {
     fetchData();
   }, [id]);
 
- 
+
 
   if (!seriesInfo) {
     return (
@@ -111,15 +111,17 @@ const SeriesInfoSection: React.FC<{ seriesInfo: SeriesInfo }> = ({ seriesInfo })
 const CreditsTab: React.FC<{ credits: any, type: any }> = ({ credits, type }) => (
   <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-5 max-lg:grid-cols-3">
     {credits && credits.map((credit: any, index: any) => (
-      <div key={index} className="flex flex-col space-x-2 overflow-hidden rounded-md border bg-muted shadow">
-        <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden bg-background/50">
-          <img src={`https://image.tmdb.org/t/p/w500/${credit.profile_path}`} alt={`${credit.name}`} />
+      <Link key={index} to={`/pessoas/${credit.id}`}>
+        <div key={index} className="flex flex-col space-x-2 overflow-hidden rounded-md border bg-muted shadow">
+          <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden bg-background/50">
+            <img src={`https://image.tmdb.org/t/p/w500/${credit.profile_path}`} alt={`${credit.name}`} />
+          </div>
+          <div className="flex flex-col space-y-0 py-2">
+            <span className="text-sm">{credit.name}</span>
+            <span className="text-xs text-muted-foreground">{type == 'character' ? credit.roles[0].character : credit.jobs[0].job}</span>
+          </div>
         </div>
-        <div className="flex flex-col space-y-0 py-2">
-          <span className="text-sm">{credit.name}</span>
-          <span className="text-xs text-muted-foreground">{type == 'character' ? credit.roles[0].character : credit.jobs[0].job}</span>
-        </div>
-      </div>
+      </Link>
     ))}
   </div>
 );
