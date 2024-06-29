@@ -47,13 +47,13 @@ const EmAltaLista: React.FC<{ emalta: any[]; title: string; description: string 
     <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-5 max-lg:grid-cols-3 mt-4">
       {emalta.map((item) => (
         <div key={item.id} className="flex flex-col space-x-2 overflow-hidden rounded-md">
-          <a href={`/filmes/${item.id}`}>
+          <a href={item.media_type == 'movie' ? `/filmes/${item.id}` : `/series/${item.id}`}>
             <div className="relative flex w-full items-center justify-center overflow-hidden bg-background/50">
               <img src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`} alt={item.title || item.name} />
             </div>
             <div className="flex flex-col space-y-0 py-4">
               <span className="text-sm">{item.title || item.name}</span>
-              <span className="text-xs text-muted-foreground">{new Date(item.release_date).toLocaleDateString('pt-br') || new Date(item.first_air_date).toLocaleDateString('pt-br')} ⭐ {item.vote_average.toPrecision(2)}</span>
+              <span className="text-xs text-muted-foreground">{item.media_type == 'movie' ? new Date(item.release_date).toLocaleDateString('pt-br') : new Date(item.first_air_date).toLocaleDateString('pt-br')} ⭐ {item.vote_average.toPrecision(2)}</span>
             </div>
           </a>
         </div>
