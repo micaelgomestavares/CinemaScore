@@ -1,5 +1,5 @@
 import SearchComponent from "@/components/search";
-import FilmesPopulares from "./filmes/Populares";
+import PopularesNaSemana from "@/components/week-trend";
 
 const Home: React.FC<{}> = () => {
   return (
@@ -22,7 +22,7 @@ const Home: React.FC<{}> = () => {
           </div>
         </div>
         <div className="mb-4 mt-8">
-          <FilmesPopulares></FilmesPopulares>
+          <PopularesNaSemana></PopularesNaSemana>
         </div>
       </section>
     </main>

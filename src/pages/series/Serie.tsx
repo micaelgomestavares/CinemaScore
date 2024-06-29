@@ -1,4 +1,4 @@
-import TabsSection from "@/components/TabsSection";
+import TabsSection from "@/components/tabs-section";
 import BackdropSection from "@/components/backdrop-section";
 import BackdropSkeletonSection from "@/components/skeletons/BackdropSkeletonSection";
 import InfoSkeletonSection from "@/components/skeletons/InfoSkeletonSection";

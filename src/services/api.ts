@@ -133,6 +133,25 @@ const api = {
     }
   },
 
+  fetchTredingInWeek: async () => {
+    const apiUrl = `${baseUrl}/trending/all/week?&language=pt-BR`;
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${VITE_TMDB_BEARER}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = await response.json();
+      return data.results;
+    } catch (error) {
+      console.error('Error fetching movie data:', error);
+      return [];
+    }
+  },
+
   fetchBestRatedMovies: async (page = 1) => {
     const apiUrl = `${baseUrl}/movie/top_rated?&language=pt-BR&page=${page}`;
 
