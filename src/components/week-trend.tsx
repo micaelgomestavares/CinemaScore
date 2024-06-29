@@ -10,8 +10,6 @@ const PopularesNaSemana: React.FC<{}> = () => {
       try {
         const response = await api.fetchTredingInWeek();
         setTrendWeek(response);
-
-        console.log("TrendWeek: ", response);
       } catch (error) {
         console.error("Error fetching movie data: ", error);
       }
