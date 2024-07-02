@@ -9,6 +9,8 @@ O projeto foi inspirado no [Plotwist](https://plotwist.app/pt-BR/home)
 
 - Listagens de filmes
 - Listagens de séries
+- Cadastro e Login de usuários
+- Criação de um diário (filmes e séries que você já assistiu)
 - Temas dark e light
 - Link com a API do TMDB
 
@@ -17,7 +19,9 @@ O projeto foi inspirado no [Plotwist](https://plotwist.app/pt-BR/home)
 
 Ainda pretendo implementar os seguintes itens neste projeto:
 
-[ ]  Criação de usuário
+[ x ]  Criação de usuário
+
+[ X ]  Criação de um diário para o usuário gerenciar o que assistiu
 
 [ ]  Listas privadas e públicas
 
