@@ -1,21 +1,22 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Command, CommandDialog, CommandInput, CommandList } from '@/components/command/command';
+import { Command, CommandDialog, CommandInput, CommandList } from '@/components/command';
 import api from '@/services/api';
 import { Button } from './ui/button';
-import { CommandSearchMovie, CommandSearchSeries } from './command/command-search-items';
-import { CommandSearchGroup } from './command/command-search-group';
+import { CommandSearchMovie, CommandSearchSeries } from './command-search-items';
+import { CommandSearchGroup } from './command-search-group';
 import { SearchIcon } from 'lucide-react';
 import { useDebounce } from '@uidotdev/usehooks';
 import { CommandSearchSkeleton } from './skeletons/CommandSearchSkeleton';
+import { DialogTitle } from '@radix-ui/react-dialog';
 
 const SearchComponent = () => {
   const [query, setQuery] = useState('');
-  const [movieResults, setMovieInfo] = useState([]);
-  const [seriesResults, setSeriesResults] = useState([]);
   const [open, setOpen] = useState(false);
   const [isLoading, setLoading] = useState(false);
+  const [movieResults, setMovieInfo] = useState([]);
+  const [seriesResults, setSeriesResults] = useState([]);
 
   const debouncedQuery = useDebounce(query, 300);
 
@@ -69,6 +70,7 @@ const SearchComponent = () => {
       <CommandDialog open={open} onOpenChange={setOpen}>
         <Command>
           <CommandList className="max-lg:w-[400px]">
+            <DialogTitle />
             <CommandInput
               placeholder={"Busque pelo nome do filme ou série"}
               value={query}

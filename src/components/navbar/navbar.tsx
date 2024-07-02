@@ -8,19 +8,23 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Clapperboard, GithubIcon, HomeIcon, Menu, MonitorPlay, PopcornIcon } from "lucide-react";
-import { ModeToggle } from "./theme/mode-toggle";
-import { Button, buttonVariants } from "./ui/button";
-import { Link } from "react-router-dom";
+import { Clapperboard, HomeIcon, LogOut, Menu, MonitorPlay, NotebookPenIcon, PopcornIcon, UserIcon } from "lucide-react";
+import { ModeToggle } from "../theme/mode-toggle";
+import { Button } from "../ui/button";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import api from "@/services/api";
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { DialogTitle } from "@radix-ui/react-dialog";
-import SearchComponent from "./search";
+import SearchComponent from "../search";
+import { useAuth } from "@/services/supabase/AuthContext";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 
 export function Navbar() {
   const [popularMovieInfo, setPopularMovieInfo] = useState<any | null>(null);
   const [popularSeriesInfo, setPopularSeriesInfo] = useState<any | null>(null);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     api.fetchPopularMovies().then((data) => {
@@ -35,6 +39,11 @@ export function Navbar() {
       console.error("Error fetching popular series: ", error);
     });
   }, []);
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/", { replace: true });
+  }
 
   return (
     <>
@@ -109,20 +118,52 @@ export function Navbar() {
                       </ul>
                     </NavigationMenuContent>
                   </NavigationMenuItem>
-
+                  {user && (
+                    <NavigationMenuItem>
+                      <NavigationMenuLink asChild>
+                        <Link className={navigationMenuTriggerStyle()} to="/">
+                          <NotebookPenIcon className="mr-2" size={16} strokeWidth={1.25} absoluteStrokeWidth /> Diário
+                        </Link>
+                      </NavigationMenuLink>
+                    </NavigationMenuItem>
+                  )}
                 </NavigationMenuList>
               </NavigationMenu>
             </div>
 
             <div className="flex items-center gap-2">
               <SearchComponent></SearchComponent>
-              <Link to="https://github.com/micaelgomestavares" target="_blank" rel="noreferrer">
-                <div className={cn(buttonVariants({ variant: "ghost" }), "w-10 px-0")}>
-                  <GithubIcon className="h-[1.2rem] w-[1.2rem]" />
-                  <span className="sr-only">GitHub</span>
-                </div>
-              </Link>
+
               <ModeToggle />
+              {user ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger><span className="flex flex-row gap-2 items-center align-middle justify-center border p-2 rounded-lg"><UserIcon></UserIcon>Minha Conta</span></DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-[200px]">
+
+                    <DropdownMenuItem>
+                      <Link to={'/diario'} className="flex items-center gap-1.5 rounded-md p-2 hover:cursor-pointer hover:bg-muted w-full">
+                        <NotebookPenIcon size={16} className="ml-1.5" />
+                        <p className="text-sm"> Diário </p>
+                      </Link>
+                    </DropdownMenuItem>
+
+                    <DropdownMenuItem
+                      className=" cursor-pointer outline-none"
+                      onClick={() => handleLogout()}
+                    >
+                      <div className="flex items-center gap-1.5 rounded-md p-2 hover:cursor-pointer hover:bg-muted">
+                        <LogOut size={16} className="ml-1.5" />
+                        <p className="text-sm">
+                          Logout
+                        </p>
+                      </div>
+                    </DropdownMenuItem>
+
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Button asChild><Link to="/login">Entrar</Link></Button>
+              )}
             </div>
           </div>
         </div>
@@ -192,6 +233,35 @@ export function Navbar() {
                     </li>
                   </ul>
                 </div>
+                {user ? (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger><span className="flex flex-row gap-2 items-center align-middle justify-center border p-2 rounded-lg"><UserIcon></UserIcon>Minha Conta</span></DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-[200px]">
+
+                      <DropdownMenuItem>
+                        <Link to={'/diario'} className="flex items-center gap-1.5 rounded-md p-2 hover:cursor-pointer hover:bg-muted w-full">
+                          <NotebookPenIcon size={16} className="ml-1.5" />
+                          <p className="text-sm"> Diário </p>
+                        </Link>
+                      </DropdownMenuItem>
+
+                      <DropdownMenuItem
+                        className=" cursor-pointer outline-none"
+                        onClick={() => handleLogout()}
+                      >
+                        <div className="flex items-center gap-1.5 rounded-md p-2 hover:cursor-pointer hover:bg-muted">
+                          <LogOut size={16} className="ml-1.5" />
+                          <p className="text-sm">
+                            Logout
+                          </p>
+                        </div>
+                      </DropdownMenuItem>
+
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : (
+                  <Button asChild><Link to="/login">Entrar</Link></Button>
+                )}
               </nav>
             </SheetContent>
           </Sheet>

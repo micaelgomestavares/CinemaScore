@@ -1,20 +1,25 @@
-import { ThemeProvider } from "./components/theme/theme-provider"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { Navbar } from "./components/navbar"
-import { Footer } from "./components/footer"
+import { ThemeProvider } from "./components/theme/theme-provider";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Navbar } from "./components/navbar/navbar";
+import { Footer } from "./components/footer";
 
-import Home from "./pages/Home"
+import Home from "./pages/Home";
 
-import Filme from "./pages/filmes/Filme"
-import FilmesPopulares from "./pages/filmes/Populares"
-import FilmesMelhoresAvaliados from "./pages/filmes/Melhores-Avaliados"
-import FilmesEstreias from "./pages/filmes/Estreias"
+import Filme from "./pages/movies/Filme";
+import FilmesPopulares from "./pages/movies/Populares";
+import FilmesMelhoresAvaliados from "./pages/movies/Melhores-Avaliados";
+import FilmesEstreias from "./pages/movies/Estreias";
 
-import Serie from "./pages/series/Serie"
-import SeriesPopulares from "./pages/series/Populares"
-import SeriesMelhoresAvaliadas from "./pages/series/Melhores-Avaliados"
-import SeriesEstreias from "./pages/series/Estreias"
-import Pessoas from "./pages/pessoas/Pessoas"
+import Serie from "./pages/series/Serie";
+import SeriesPopulares from "./pages/series/Populares";
+import SeriesMelhoresAvaliadas from "./pages/series/Melhores-Avaliados";
+import SeriesEstreias from "./pages/series/Estreias";
+import Pessoas from "./pages/cast/Cast";
+import LoginPage from "./pages/auth/LoginPage";
+import Diary from "./pages/diary/Diary";
+import ProtectedRoute from "./pages/ProtectedRoute";
+import UsersProfile from "./pages/users/Users";
+import { Toaster } from "./components/ui/toaster";
 
 function App() {
   return (
@@ -23,6 +28,11 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<LoginPage />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/diario" element={<Diary />} />
+          </Route>
           <Route path="filmes">
             <Route path="populares" element={<FilmesPopulares />} />
             <Route path="estreias" element={<FilmesEstreias />} />
@@ -38,12 +48,16 @@ function App() {
           <Route path="pessoas">
             <Route path=":id" element={<Pessoas />} />
           </Route>
+          <Route path="user">
+            <Route path=":username" element={<UsersProfile />} />
+          </Route>
           <Route path="*" element={<Home />} />
         </Routes>
+        <Toaster />
         <Footer />
       </BrowserRouter>
     </ThemeProvider>
-  )
+  );
 }
 
-export default App
+export default App;

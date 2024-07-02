@@ -37,7 +37,7 @@ const PopularesNaSemana: React.FC<{}> = () => {
 };
 
 const EmAltaLista: React.FC<{ emalta: any[]; title: string; description: string }> = ({ emalta, title, description }) => (
-  <section className="mt-4 p-4">
+  <section className="mt-4 max-xl:p-4">
     <div className="mb-4">
       <h1 className="text-lg font-bold md:text-4xl">{title}</h1>
       <p className="text-xs leading-5 text-muted-foreground md:text-sm md:leading-6">{description}</p>

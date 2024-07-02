@@ -27,7 +27,6 @@ const Pessoas: React.FC<{}> = () => {
         setPersonInfo(personInfoData);
         setRecognizedBy(recognizedByData.cast);
 
-        console.log(personInfoData, recognizedByData.cast.slice(0, 5));
       } catch (error) {
         console.error("Error fetching person data: ", error);
       }
