@@ -70,7 +70,7 @@ const SignUpForm: React.FC = () => {
         />
         {errors.avatar_url && <p className="text-xs text-muted-foreground mt-2">{errors.avatar_url.message}</p>}
       </div>
-      <Button type="submit" disabled={isSubmitting}>Sign Up</Button>
+      <Button type="submit" disabled={isSubmitting}>Realizar Cadastro</Button>
     </form>
   );
 };
