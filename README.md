@@ -1,7 +1,9 @@
 
 # Cinema Score
 
-Este é um projeto criado para o meu portfolio pessoal, utilizando a api do TMDB criei um webapp utilizando o React com o TailwindCSS para estilização dos componentes e o shadn/ui como biblioteca de componentes. Basicamente a ideia do projeto é ser um clone do famoso LETTERBOX.
+Este é um projeto criado para o meu portfolio pessoal, utilizando a api do TMDB criei um webapp utilizando o React com o TailwindCSS para estilização dos componentes e o shadn/ui como biblioteca de componentes. Basicamente a ideia do projeto é ser um clone do famoso LETTERBOX. 
+
+O projeto foi inspirado no [Plotwist](https://plotwist.app/pt-BR/home)
 
 ## Funcionalidades
 
