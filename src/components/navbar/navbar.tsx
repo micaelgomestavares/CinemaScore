@@ -19,6 +19,7 @@ import { DialogTitle } from "@radix-ui/react-dialog";
 import SearchComponent from "../search";
 import { useAuth } from "@/services/supabase/AuthContext";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 export function Navbar() {
   const [popularMovieInfo, setPopularMovieInfo] = useState<any | null>(null);
@@ -137,13 +138,18 @@ export function Navbar() {
               <ModeToggle />
               {user ? (
                 <DropdownMenu>
-                  <DropdownMenuTrigger><span className="flex flex-row gap-2 items-center align-middle justify-center border p-2 rounded-lg"><UserIcon></UserIcon>Minha Conta</span></DropdownMenuTrigger>
+                  <DropdownMenuTrigger>
+                    <Avatar>
+                      <AvatarImage src={`https://ui-avatars.com/api/?name=${user.username}`} alt="@shadcn" />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                  </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-[200px]">
 
                     <DropdownMenuItem>
                       <Link to={'/diario'} className="flex items-center gap-1.5 rounded-md p-2 hover:cursor-pointer hover:bg-muted w-full">
                         <NotebookPenIcon size={16} className="ml-1.5" />
-                        <p className="text-sm"> Diário </p>
+                        <p className="text-sm">Meu Diário</p>
                       </Link>
                     </DropdownMenuItem>
 
@@ -235,7 +241,7 @@ export function Navbar() {
                 </div>
                 {user ? (
                   <DropdownMenu>
-                    <DropdownMenuTrigger><span className="flex flex-row gap-2 items-center align-middle justify-center border p-2 rounded-lg"><UserIcon></UserIcon>Minha Conta</span></DropdownMenuTrigger>
+                    <DropdownMenuTrigger><span className="flex flex-row gap-2 items-center align-middle justify-center border p-2 rounded-lg mt-auto"><UserIcon></UserIcon>Minha Conta</span></DropdownMenuTrigger>
                     <DropdownMenuContent className="w-[200px]">
 
                       <DropdownMenuItem>

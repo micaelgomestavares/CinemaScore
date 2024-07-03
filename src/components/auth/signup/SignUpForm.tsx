@@ -64,15 +64,6 @@ const SignUpForm: React.FC = () => {
         </div>
         {errors.password && <p className="text-xs text-muted-foreground mt-2">{errors.password.message}</p>}
       </div>
-      <div>
-        <Label htmlFor="avatar_url">URL do Avatar</Label>
-        <Input
-          id="avatar_url"
-          type="text"
-          {...register("avatar_url")}
-        />
-        {errors.avatar_url && <p className="text-xs text-muted-foreground mt-2">{errors.avatar_url.message}</p>}
-      </div>
       <Button type="submit" disabled={isSubmitting}>Realizar Cadastro</Button>
     </form>
   );

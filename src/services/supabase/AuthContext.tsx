@@ -58,7 +58,6 @@ export const AuthContextProvider = ({
 
   const signUpWithCredentials = async ({
     username,
-    avatar_url,
     ...credentials
   }: SignUpFormInputs) => {
     const { email, password } = credentials;
@@ -69,7 +68,6 @@ export const AuthContextProvider = ({
         options: {
           data: {
             username,
-            avatar_url,
           },
         },
       });
