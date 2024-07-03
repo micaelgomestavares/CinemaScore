@@ -1,36 +1,31 @@
 
 # Cinema Score
 
-Este é um projeto criado para o meu portfolio pessoal, utilizando a api do TMDB criei um webapp utilizando o React com o TailwindCSS para estilização dos componentes e o shadn/ui como biblioteca de componentes. Basicamente a ideia do projeto é ser um clone do famoso LETTERBOX. 
-
-O projeto foi inspirado no [Plotwist](https://plotwist.app/pt-BR/home)
+Este é um projeto criado para o meu portfolio pessoal, utilizando a api do TMDB criei um webapp utilizando o React com o TailwindCSS para estilização dos componentes, shadcn/ui como biblioteca de componentes e o Supabase para o Banco de Dados. Basicamente a ideia do projeto é ser um clone do famoso Letterbox e foi inspirado no projeto brasileiro [Plotwist](https://plotwist.app/pt-BR/home). 
 
 ## Funcionalidades
 
+- Temas Claro e Escuro
+- Uso da API do TMDB
 - Listagens de filmes
 - Listagens de séries
 - Cadastro e Login de usuários
-- Criação de um diário (filmes e séries que você já assistiu)
-- Temas dark e light
-- Link com a API do TMDB
+- Criação de um diário (filmes e séries que você já assistiu, com data e nota para cada).
 
 
 ## Roadmap
 
 Ainda pretendo implementar os seguintes itens neste projeto:
 
-[ x ]  Criação de usuário
-
-[ X ]  Criação de um diário para o usuário gerenciar o que assistiu
-
 [ ]  Listas privadas e públicas
 
 [ ]  Listas ranqueadas
 
+[ ]  Perfil de usuário elaborado
+
 ## Stack utilizada
 
-**Front-end:** React c/ Typescript e utilizando a biblioteca Shadcn para componentes.
-
+**Front-end:** React c/ Typescript, Tailwindcss para estilização de componentes, a biblioteca Shadcn/ui como biblioteca de componentes e Supabase para o banco de dados.
 
 ## Variáveis de Ambiente
 
@@ -39,3 +34,7 @@ Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de
 `VITE_TMDB_API_KEY`
 &
 `VITE_TMDB_BEARER`
+
+`VITE_SUPABASE_URL`
+&
+`VITE_SUPABASE_ANON_KEY`
