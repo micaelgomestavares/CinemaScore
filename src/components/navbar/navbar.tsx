@@ -121,7 +121,7 @@ export function Navbar() {
                   {user && (
                     <NavigationMenuItem>
                       <NavigationMenuLink asChild>
-                        <Link className={navigationMenuTriggerStyle()} to="/">
+                        <Link className={navigationMenuTriggerStyle()} to="/diario">
                           <NotebookPenIcon className="mr-2" size={16} strokeWidth={1.25} absoluteStrokeWidth /> Diário
                         </Link>
                       </NavigationMenuLink>
