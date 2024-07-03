@@ -5,7 +5,8 @@ export const getUserDiaryEntries = async (userId: string) => {
     const { data, error } = await supabase
       .from('diary_entries')
       .select('*')
-      .eq('user_id', userId);
+      .eq('user_id', userId)
+      .order('watch_date', { ascending: false }); // Ordena por watch_date decrescente
 
     if (error) {
       throw error;

@@ -1,5 +1,5 @@
 import { AuthContextProvider } from './services/supabase/AuthContext.tsx';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import '../app/globals.css';
 import { getUserService } from './services/supabase/User/get-user.ts';
@@ -7,7 +7,7 @@ import { getUserService } from './services/supabase/User/get-user.ts';
 async function initializeApp() {
   const user = await getUserService();
 
-  (ReactDOM as any).createRoot(document.getElementById('root')!).render(
+  ReactDOM.createRoot(document.getElementById('root')!).render(
     <AuthContextProvider initialUser={user}>
       <App />
     </AuthContextProvider>

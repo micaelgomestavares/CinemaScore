@@ -3,16 +3,16 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import StarRating from "@/components/star-rating";
 import { useAuth } from "@/services/supabase/AuthContext";
-import { Input } from "@/components/ui/input";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useToast } from "@/components/ui/use-toast"; // Import useToast here
 import { saveUserDiaryEntry } from "@/services/supabase/Diary/save-item";
+import { DatePickerDetail } from "@/components/date-picker";
 
 const DetailsDialog = ({ open, onClose, data }: any) => {
   const { user } = useAuth();
   const [rating, setRating] = useState(data.stars || 0);
   const [watchDate, setWatchDate] = useState(new Date().toISOString().split('T')[0]);
-  const { toast } = useToast(); // useToast inside the component
+  const { toast } = useToast();
 
   const handleRatingChange = (rate: number) => {
     setRating(rate);
@@ -67,16 +67,14 @@ const DetailsDialog = ({ open, onClose, data }: any) => {
               <span className="text-gray-700">Nota: </span>
               <StarRating rating={rating} onRatingChange={handleRatingChange} />
             </div>
-            <label className="block mt-4">
+
+            <div className="flex flex-col mt-6 gap-2">
               <span className="text-gray-700">Assistiu em: </span>
-              <Input
-                type="date"
-                className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:ring-blue-300"
-                value={watchDate}
-                onChange={(e) => setWatchDate(e.target.value)}
-              />
-            </label>
-            <Button onClick={handleSave} className="mt-4">Adicionar</Button>
+              <DatePickerDetail date={watchDate} setDate={setWatchDate} />
+            </div>
+            <div className="flex justify-end mx-auto">
+              <Button onClick={handleSave} className="mt-4">Adicionar</Button>
+            </div>
           </div>
         </div>
       </DialogContent>

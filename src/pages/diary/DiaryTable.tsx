@@ -41,6 +41,29 @@ export function DiaryTable() {
     fetchDiaryEntries();
   }, [user]);
 
+  function formatDate(date: string): string {
+    // Verifica se a string está no formato esperado (yyyy-MM-dd)
+    if (!/\d{4}-\d{2}-\d{2}/.test(date)) {
+        throw new Error('Formato de data inválido. Esperado: yyyy-MM-dd');
+    }
+
+    // Divide a string da data em partes
+    const parts = date.split('-');
+
+    // Verifica se temos três componentes de data
+    if (parts.length !== 3) {
+        throw new Error('Formato de data inválido. Esperado: yyyy-MM-dd');
+    }
+
+    // Extrai o dia, mês e ano
+    const year = parts[0];
+    const month = parts[1];
+    const day = parts[2];
+
+    // Retorna a data formatada como dd/MM/yyyy
+    return `${day}/${month}/${year}`;
+}
+
   return (
     <Table>
       <TableHeader>
@@ -55,7 +78,7 @@ export function DiaryTable() {
       <TableBody>
         {data.map((entry: any) => (
           <TableRow key={entry.id}>
-            <TableCell className="font-medium">{new Date(entry.watch_date).toLocaleDateString("pt-BR")}</TableCell>
+            <TableCell className="font-medium">{formatDate(entry.watch_date)}</TableCell>
             <TableCell>{entry.title}</TableCell>
             <TableCell>{new Date(entry.release_date).getFullYear()}</TableCell>
             <TableCell>{renderStars(entry.rating.toString())}</TableCell>

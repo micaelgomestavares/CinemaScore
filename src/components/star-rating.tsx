@@ -36,11 +36,11 @@ const StarRating: React.FC<StarRatingProps> = ({ rating, onRatingChange, classNa
         className={`cursor-pointer ${className}`}
       >
         {isFullStar ? (
-          <FaStar className="text-yellow-500 w-5 h-5" />
+          <FaStar className="text-yellow-500 w-6 h-6" />
         ) : isHalfStar ? (
-          <FaStarHalfAlt className="text-yellow-500 w-5 h-5" />
+          <FaStarHalfAlt className="text-yellow-500 w-6 h-6" />
         ) : (
-          <FaRegStar className="text-gray-300 w-5 h-5" />
+          <FaRegStar className="text-gray-300 w-6 h-6" />
         )}
       </div>
     );

@@ -2,7 +2,6 @@ import { createContext, useContext, useState } from 'react';
 import { LoginFormInputs } from '@/components/auth/login/LoginSchema';
 import { SignUpFormInputs } from '@/components/auth/signup/SignUpSchema';
 import { Profile } from '@/types/user-profile';
-import { redirect } from 'react-router-dom';
 import { getProfileById } from './Profile/get-profile-by-id';
 import supabase from './client';
 import { useToast } from "@/components/ui/use-toast";
@@ -93,7 +92,6 @@ export const AuthContextProvider = ({
         title: "Cadastro realizado com sucesso.",
         description: "O seu cadastro foi realizado com sucesso. Seja bem vindo(a).",
       });
-      redirect("/");
     } catch (error: any) {
       console.error('Error signing up:', error.message);
     }

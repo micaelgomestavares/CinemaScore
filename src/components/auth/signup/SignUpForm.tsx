@@ -9,10 +9,11 @@ import { Eye, EyeOff } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "@/services/supabase/AuthContext";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SignUpForm: React.FC = () => {
   const { signUpWithCredentials } = useAuth();
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<SignUpFormInputs>({
@@ -21,7 +22,7 @@ const SignUpForm: React.FC = () => {
 
   const onSubmit = async (values: SignUpFormInputs) => {
     await signUpWithCredentials(values);
-    redirect("/");
+    navigate("/");
   };
 
   return (

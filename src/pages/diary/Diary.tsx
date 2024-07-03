@@ -25,7 +25,7 @@ const Diary: React.FC = () => {
   return (
     <main className="w-full">
       <section className="mx-auto my-4 w-full max-w-6xl mt-8">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 max-lg:p-4">
           <Button
             onClick={() => setOpen(true)}
             variant="outline"
