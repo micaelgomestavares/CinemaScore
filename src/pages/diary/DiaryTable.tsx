@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { useAuth } from "@/services/supabase/AuthContext";
-import { getUserDiaryEntries } from "@/services/supabase/Diary/get-user-diary";
+import EditDialog from "./EditDiaryItemDialog";
+import { Button } from "@/components/ui/button";
+import DeleteDialog from "./DeleteDiaryItemDialog";
+import { deleteDiaryEntry, getUserDiaryEntries, updateDiaryEntry } from "@/services/supabase/Diary/Diary";
+import { PenIcon, Trash } from "lucide-react";
+import { formatDate } from "@/lib/utils";
 
 const renderStars = (stars: string) => {
   const fullStars = Math.floor(Number(stars));
@@ -29,6 +34,9 @@ const renderStars = (stars: string) => {
 export function DiaryTable() {
   const { user } = useAuth();
   const [data, setData] = useState<any[]>([]);
+  const [selectedEntry, setSelectedEntry] = useState<any | null>(null);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   useEffect(() => {
     const fetchDiaryEntries = async () => {
@@ -41,53 +49,77 @@ export function DiaryTable() {
     fetchDiaryEntries();
   }, [user]);
 
-  function formatDate(date: string): string {
-    // Verifica se a string está no formato esperado (yyyy-MM-dd)
-    if (!/\d{4}-\d{2}-\d{2}/.test(date)) {
-        throw new Error('Formato de data inválido. Esperado: yyyy-MM-dd');
+  const handleEditClick = (entry: any) => {
+    setSelectedEntry(entry);
+    setIsEditDialogOpen(true);
+  };
+
+  const handleDeleteClick = (entry: any) => {
+    setSelectedEntry(entry);
+    setIsDeleteDialogOpen(true);
+  };
+
+  const handleSave = async (editedEntry: any) => {
+    await updateDiaryEntry(editedEntry);
+    setData((prevData) =>
+      prevData.map((item) => (item.id === editedEntry.id ? editedEntry : item))
+    );
+  };
+
+  const handleDelete = async () => {
+    if (!selectedEntry || !user) {
+      return;
     }
+    await deleteDiaryEntry(selectedEntry.id, user.id);
+    setData((prevData) => prevData.filter((item) => item.id !== selectedEntry.id));
+    setIsDeleteDialogOpen(false);
+  };
 
-    // Divide a string da data em partes
-    const parts = date.split('-');
-
-    // Verifica se temos três componentes de data
-    if (parts.length !== 3) {
-        throw new Error('Formato de data inválido. Esperado: yyyy-MM-dd');
-    }
-
-    // Extrai o dia, mês e ano
-    const year = parts[0];
-    const month = parts[1];
-    const day = parts[2];
-
-    // Retorna a data formatada como dd/MM/yyyy
-    return `${day}/${month}/${year}`;
-}
 
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Data assistida</TableHead>
-          <TableHead>Titulo</TableHead>
-          <TableHead>Data de lançamento</TableHead>
-          <TableHead>Nota</TableHead>
-          <TableHead>Editar</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {data.map((entry: any) => (
-          <TableRow key={entry.id}>
-            <TableCell className="font-medium">{formatDate(entry.watch_date)}</TableCell>
-            <TableCell>{entry.title}</TableCell>
-            <TableCell>{new Date(entry.release_date).getFullYear()}</TableCell>
-            <TableCell>{renderStars(entry.rating.toString())}</TableCell>
-            <TableCell>
-              {/* Add edit button if needed */}
-            </TableCell>
+    <>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Data assistida</TableHead>
+            <TableHead>Poster</TableHead>
+            <TableHead>Titulo</TableHead>
+            <TableHead>Data de lançamento</TableHead>
+            <TableHead>Nota</TableHead>
+            <TableHead>Ações</TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {data.map((entry: any) => (
+            <TableRow key={entry.id}>
+              <TableCell className="font-medium">{formatDate(entry.watch_date)}</TableCell>
+              <TableCell><img className="w-16" src={`https://image.tmdb.org/t/p/w500/${entry.poster_path}`} alt={entry.title} /></TableCell>
+              <TableCell>{entry.title}</TableCell>
+              <TableCell>{new Date(entry.release_date).getFullYear()}</TableCell>
+              <TableCell>{renderStars(entry.rating.toString())}</TableCell>
+              <TableCell>
+                <Button onClick={() => handleEditClick(entry)}><PenIcon className="w-5 h-5"></PenIcon></Button>
+                <Button className="ml-2" variant={'destructive'} onClick={() => handleDeleteClick(entry)}><Trash className="w-5 h-5"></Trash></Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      {selectedEntry && (
+        <EditDialog
+          open={isEditDialogOpen}
+          onClose={() => setIsEditDialogOpen(false)}
+          entry={selectedEntry}
+          onSave={handleSave}
+        />
+      )}
+      {selectedEntry && (
+        <DeleteDialog
+          open={isDeleteDialogOpen}
+          onClose={() => setIsDeleteDialogOpen(false)}
+          onDelete={handleDelete}
+        />
+      )}
+    </>
   );
 }

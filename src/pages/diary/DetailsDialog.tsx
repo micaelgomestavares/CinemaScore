@@ -5,8 +5,8 @@ import StarRating from "@/components/star-rating";
 import { useAuth } from "@/services/supabase/AuthContext";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useToast } from "@/components/ui/use-toast"; // Import useToast here
-import { saveUserDiaryEntry } from "@/services/supabase/Diary/save-item";
 import { DatePickerDetail } from "@/components/date-picker";
+import { saveUserDiaryEntry } from "@/services/supabase/Diary/Diary";
 
 const DetailsDialog = ({ open, onClose, data }: any) => {
   const { user } = useAuth();
@@ -29,6 +29,7 @@ const DetailsDialog = ({ open, onClose, data }: any) => {
       title: data.type === 'movie' ? data.title : data.name,
       release_date: data.type === 'movie' ? data.release_date : data.first_air_date,
       watch_date: watchDate,
+      poster_path: data.poster_path,
       rating: rating,
     };
 
