@@ -54,84 +54,84 @@ const WatchListCommandSearch: React.FC<CommandSearchProps> = ({ open, onOpenChan
   const hasResults = hasMovies || hasTvSeries;
 
   return (
-    <CommandDialog open={open} onOpenChange={onOpenChange}>
-      <Command>
-        <CommandList aria-describedby="Movies" className="max-lg:w-[400px]">
-          <DialogTitle></DialogTitle>
-          <CommandInput
-            placeholder={"Busque pelo nome do filme ou série"}
-            value={query}
-            onValueChange={(value) => setQuery(value)}
-          />
+      <CommandDialog open={open} onOpenChange={onOpenChange}>
+        <Command>
+          <CommandList aria-describedby="Movies" className="max-lg:w-[400px]">
+            <DialogTitle></DialogTitle>
+            <CommandInput
+              placeholder={"Busque pelo nome do filme ou série"}
+              value={query}
+              onValueChange={(value) => setQuery(value)}
+            />
 
-          {isLoading && (
-            <div className="space-y-8">
-              <CommandSearchGroup heading='Filmes'>
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <CommandSearchSkeleton key={index} />
-                ))}
-              </CommandSearchGroup>
-
-              <CommandSearchGroup heading='Séries'>
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <CommandSearchSkeleton key={index} />
-                ))}
-              </CommandSearchGroup>
-            </div>
-          )}
-
-          {!isLoading && hasResults ? (
-            <div className="">
-              {hasMovies && (
+            {isLoading && (
+              <div className="space-y-8">
                 <CommandSearchGroup heading='Filmes'>
-                  {movieResults?.map((movie: any) => (
-                    <a
-                      className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
-                      onClick={() => onSelect(movie, 'movie')}
-                      key={movie.id}
-                    >
-                      <span className="truncate whitespace-nowrap text-sm">
-                        {movie.title}
-                      </span>
-
-                      <span className="whitespace-nowrap text-xs text-muted-foreground">
-                        {movie.first_air_date !== '' &&
-                          new Date(movie.release_date).getFullYear()}
-                      </span>
-                    </a>
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <CommandSearchSkeleton key={index} />
                   ))}
                 </CommandSearchGroup>
-              )}
 
-              {hasTvSeries && (
                 <CommandSearchGroup heading='Séries'>
-                  {seriesResults?.map((tvSerie: any) => (
-                    <a
-                      key={tvSerie.id}
-                      className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
-                      onClick={() => onSelect(tvSerie, 'series')}
-                    >
-                      <span className="truncate whitespace-nowrap text-sm">
-                        {tvSerie.name}
-                      </span>
-
-                      <span className="whitespace-nowrap text-xs text-muted-foreground">
-                        {tvSerie.release_date !== '' &&
-                          new Date(tvSerie.first_air_date).getFullYear()}
-                      </span>
-                    </a>
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <CommandSearchSkeleton key={index} />
                   ))}
                 </CommandSearchGroup>
-              )}
-            </div>
-          ) : (
-            <p className="p-8 text-center">
-              Não encontramos nada para a sua busca
-            </p>
-          )}
-        </CommandList>
-      </Command>
-    </CommandDialog>
+              </div>
+            )}
+
+            {!isLoading && hasResults ? (
+              <div className="">
+                {hasMovies && (
+                  <CommandSearchGroup heading='Filmes'>
+                    {movieResults?.map((movie: any) => (
+                      <a
+                        className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
+                        onClick={() => onSelect(movie, 'movie')}
+                        key={movie.id}
+                      >
+                        <span className="truncate whitespace-nowrap text-sm">
+                          {movie.title}
+                        </span>
+
+                        <span className="whitespace-nowrap text-xs text-muted-foreground">
+                          {movie.first_air_date !== '' &&
+                            new Date(movie.release_date).getFullYear()}
+                        </span>
+                      </a>
+                    ))}
+                  </CommandSearchGroup>
+                )}
+
+                {hasTvSeries && (
+                  <CommandSearchGroup heading='Séries'>
+                    {seriesResults?.map((tvSerie: any) => (
+                      <a
+                        key={tvSerie.id}
+                        className="flex cursor-pointer items-center justify-between gap-4 rounded-sm p-2 hover:bg-muted"
+                        onClick={() => onSelect(tvSerie, 'series')}
+                      >
+                        <span className="truncate whitespace-nowrap text-sm">
+                          {tvSerie.name}
+                        </span>
+
+                        <span className="whitespace-nowrap text-xs text-muted-foreground">
+                          {tvSerie.release_date !== '' &&
+                            new Date(tvSerie.first_air_date).getFullYear()}
+                        </span>
+                      </a>
+                    ))}
+                  </CommandSearchGroup>
+                )}
+              </div>
+            ) : (
+              <p className="p-8 text-center">
+                Não encontramos nada para a sua busca
+              </p>
+            )}
+          </CommandList>
+        </Command>
+      </CommandDialog>
   );
 };
 

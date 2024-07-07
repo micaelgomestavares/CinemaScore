@@ -54,7 +54,6 @@ const WatchList: React.FC<{}> = () => {
     const fetchDiaryEntries = async () => {
       if (user) {
         const entries = await getUserWatchList(user.id);
-        console.log(entries);
         setWatchListData(entries);
       }
     };
