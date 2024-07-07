@@ -59,7 +59,7 @@ export function Footer() {
         <Separator className="my-6" />
         <section>
           <h3>
-            &copy; 2024 Desenvolvido com o ❤️ por <a
+            &copy; 2024 Desenvolvido por <a
               target="_blank"
               href="https://github.com/micaelgomestavares"
               className="text-primary transition-all border-primary hover:border-b-2"

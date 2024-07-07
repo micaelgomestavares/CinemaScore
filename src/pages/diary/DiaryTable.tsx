@@ -98,8 +98,10 @@ export function DiaryTable() {
               <TableCell>{new Date(entry.release_date).getFullYear()}</TableCell>
               <TableCell>{renderStars(entry.rating.toString())}</TableCell>
               <TableCell>
-                <Button onClick={() => handleEditClick(entry)}><PenIcon className="w-5 h-5"></PenIcon></Button>
-                <Button className="ml-2" variant={'destructive'} onClick={() => handleDeleteClick(entry)}><Trash className="w-5 h-5"></Trash></Button>
+                <div className="flex flex-row max-lg:flex-col gap-2">
+                  <Button onClick={() => handleEditClick(entry)}><PenIcon className="w-5 h-5"></PenIcon></Button>
+                  <Button variant={'destructive'} onClick={() => handleDeleteClick(entry)}><Trash className="w-5 h-5"></Trash></Button>
+                </div>
               </TableCell>
             </TableRow>
           ))}

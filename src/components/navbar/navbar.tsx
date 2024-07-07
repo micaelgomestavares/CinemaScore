@@ -1,4 +1,8 @@
+import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -8,18 +12,15 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Clapperboard, HomeIcon, LogOut, Menu, MonitorPlay, NotebookPenIcon, PopcornIcon, UserIcon } from "lucide-react";
-import { ModeToggle } from "../theme/mode-toggle";
 import { Button } from "../ui/button";
-import { Link, useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
-import api from "@/services/api";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { DialogTitle } from "@radix-ui/react-dialog";
-import SearchComponent from "../search";
+import { Clapperboard, HomeIcon, LogOut, Menu, MonitorPlay, NotebookPenIcon, PopcornIcon, TvMinimal, UserIcon } from "lucide-react";
+import { ModeToggle } from "../theme/mode-toggle";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/services/supabase/AuthContext";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import api from "@/services/api";
+import SearchComponent from "../search";
 
 export function Navbar() {
   const [popularMovieInfo, setPopularMovieInfo] = useState<any | null>(null);
@@ -119,6 +120,7 @@ export function Navbar() {
                       </ul>
                     </NavigationMenuContent>
                   </NavigationMenuItem>
+
                   {user && (
                     <NavigationMenuItem>
                       <NavigationMenuLink asChild>
@@ -153,6 +155,13 @@ export function Navbar() {
                       </Link>
                     </DropdownMenuItem>
 
+                    <DropdownMenuItem>
+                      <Link to={'/watchlist'} className="flex items-center gap-1.5 rounded-md p-2 hover:cursor-pointer hover:bg-muted w-full">
+                        <TvMinimal size={16} className="ml-1.5" />
+                        <p className="text-sm">Para assistir</p>
+                      </Link>
+                    </DropdownMenuItem>
+
                     <DropdownMenuItem
                       className=" cursor-pointer outline-none"
                       onClick={() => handleLogout()}
@@ -177,101 +186,159 @@ export function Navbar() {
 
       {/* Mobile Navbar */}
       <div className="flex flex-col lg:hidden">
-        <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+        <header className="flex h-14 justify-between items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
           <Sheet>
             <SheetTrigger aria-describedby="Mobile Navbar" asChild>
               <Button variant="outline" size="icon" className="shrink-0">
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle navigation menu</span>
               </Button>
-
             </SheetTrigger>
 
-            <SheetContent aria-description="Mobile Navbar" side="left" className="flex flex-col">
+            <SheetContent aria-description="Mobile Navbar" side="left" className="flex flex-col p-6">
               <DialogTitle></DialogTitle>
-              <nav className="grid gap-2 text-lg font-medium">
+              <nav className="grid gap-y-6 text-lg font-medium">
+
                 <Link to="/" className="flex items-center gap-2 p-2 rounded-md hover:bg-accent hover:text-accent-foreground">
                   <HomeIcon className="mr-2" size={16} strokeWidth={1.25} absoluteStrokeWidth /> Ínicio
                 </Link>
-                <div className="flex flex-col gap-2">
-                  <span className="flex items-center gap-2 p-2 rounded-md cursor-pointer hover:bg-accent hover:text-accent-foreground">
-                    <Clapperboard className="mr-2" size={16} strokeWidth={1.25} absoluteStrokeWidth /> Filmes
-                  </span>
-                  <ul className="ml-4">
 
-                    <li>
-                      <Link to="/filmes/populares" className="block select-none p-3 no-underline outline-none">
-                        🤩 Populares
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/filmes/melhores-avaliados" className="block select-none p-3 no-underline outline-none">
-                        ⭐ Melhores Avaliados
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/filmes/estreias" className="block select-none p-3 no-underline outline-none">
-                        📅 Próximas estreias
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <span className="flex items-center gap-2 p-2 rounded-md cursor-pointer hover:bg-accent hover:text-accent-foreground">
-                    <MonitorPlay className="mr-2" size={16} strokeWidth={1.25} absoluteStrokeWidth /> Séries
-                  </span>
-                  <ul className="ml-4">
+                <Accordion type="single" collapsible>
+                  <AccordionItem value="filmes">
+                    <AccordionTrigger>
+                      <span className="flex items-center gap-2 p-2 rounded-md cursor-pointer">
+                        <Clapperboard className="mr-2" size={16} strokeWidth={1.25} absoluteStrokeWidth /> Filmes
+                      </span>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <ul className="ml-4">
+                        <li>
+                          <Link to="/filmes/populares" className="block select-none p-3 no-underline outline-none">
+                            🤩 Populares
+                          </Link>
+                        </li>
+                        <li>
+                          <Link to="/filmes/melhores-avaliados" className="block select-none p-3 no-underline outline-none">
+                            ⭐ Melhores Avaliados
+                          </Link>
+                        </li>
+                        <li>
+                          <Link to="/filmes/estreias" className="block select-none p-3 no-underline outline-none">
+                            📅 Próximas estreias
+                          </Link>
+                        </li>
+                      </ul>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
 
-                    <li>
-                      <Link to="/series/populares" className="block select-none p-3 no-underline outline-none">
-                        🤩 Populares
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/series/melhores-avaliados" className="block select-none p-3 no-underline outline-none">
-                        ⭐ Melhores Avaliadas
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/series/estreias" className="block select-none p-3 no-underline outline-none">
-                        📅 Próximas estreias
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
+                <Accordion type="single" collapsible>
+                  <AccordionItem value="series">
+                    <AccordionTrigger>
+                      <span className="flex items-center gap-2 p-2 rounded-md cursor-pointer">
+                        <MonitorPlay className="mr-2" size={16} strokeWidth={1.25} absoluteStrokeWidth /> Séries
+                      </span>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <ul className="ml-4">
+                        <li>
+                          <Link to="/series/populares" className="block select-none p-3 no-underline outline-none">
+                            🤩 Populares
+                          </Link>
+                        </li>
+                        <li>
+                          <Link to="/series/melhores-avaliados" className="block select-none p-3 no-underline outline-none">
+                            ⭐ Melhores Avaliadas
+                          </Link>
+                        </li>
+                        <li>
+                          <Link to="/series/estreias" className="block select-none p-3 no-underline outline-none">
+                            📅 Próximas estreias
+                          </Link>
+                        </li>
+                      </ul>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+
                 {user ? (
-                  <DropdownMenu>
-                    <DropdownMenuTrigger><span className="flex flex-row gap-2 items-center align-middle justify-center border p-2 rounded-lg mt-auto"><UserIcon></UserIcon>Minha Conta</span></DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-[200px]">
+                  <Accordion type="single" collapsible>
+                    <AccordionItem value="account">
+                      <AccordionTrigger>
+                        <span className="flex items-center gap-2 p-2 rounded-md cursor-pointer">
+                          <UserIcon className="mr-2" size={16} strokeWidth={1.25} absoluteStrokeWidth /> Minha Conta
+                        </span>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <ul>
+                          <Link to={'/diario'} className="flex items-center gap-1.5 rounded-md p-2 hover:cursor-pointer hover:bg-muted w-full">
+                            <NotebookPenIcon size={16} className="ml-1.5" />
+                            <p className="text-sm"> Diário </p>
+                          </Link>
 
-                      <DropdownMenuItem>
-                        <Link to={'/diario'} className="flex items-center gap-1.5 rounded-md p-2 hover:cursor-pointer hover:bg-muted w-full">
-                          <NotebookPenIcon size={16} className="ml-1.5" />
-                          <p className="text-sm"> Diário </p>
-                        </Link>
-                      </DropdownMenuItem>
+                          <Link to={'/watchlist'} className="flex items-center gap-1.5 rounded-md p-2 hover:cursor-pointer hover:bg-muted w-full">
+                            <TvMinimal size={16} className="ml-1.5" />
+                            <p className="text-sm"> Para assistir </p>
+                          </Link>
 
-                      <DropdownMenuItem
-                        className=" cursor-pointer outline-none"
-                        onClick={() => handleLogout()}
-                      >
-                        <div className="flex items-center gap-1.5 rounded-md p-2 hover:cursor-pointer hover:bg-muted">
-                          <LogOut size={16} className="ml-1.5" />
-                          <p className="text-sm">
-                            Logout
-                          </p>
-                        </div>
-                      </DropdownMenuItem>
-
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                          <a onClick={() => handleLogout()} className="flex items-center gap-1.5 rounded-md p-2 hover:cursor-pointer hover:bg-muted w-full">
+                            <LogOut size={16} className="ml-1.5" />
+                            <p className="text-sm"> Sair </p>
+                          </a>
+                        </ul>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
                 ) : (
                   <Button asChild><Link to="/login">Entrar</Link></Button>
                 )}
               </nav>
             </SheetContent>
           </Sheet>
+
           <SearchComponent></SearchComponent>
+
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Avatar>
+                  <AvatarImage src={`https://ui-avatars.com/api/?name=${user.username}`} alt="@shadcn" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-[200px]">
+
+                <DropdownMenuItem>
+                  <Link to={'/diario'} className="flex items-center gap-1.5 rounded-md p-2 hover:cursor-pointer hover:bg-muted w-full">
+                    <NotebookPenIcon size={16} className="ml-1.5" />
+                    <p className="text-sm">Meu Diário</p>
+                  </Link>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem>
+                  <Link to={'/watchlist'} className="flex items-center gap-1.5 rounded-md p-2 hover:cursor-pointer hover:bg-muted w-full">
+                    <TvMinimal size={16} className="ml-1.5" />
+                    <p className="text-sm">Para assistir</p>
+                  </Link>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem
+                  className=" cursor-pointer outline-none"
+                  onClick={() => handleLogout()}
+                >
+                  <div className="flex items-center gap-1.5 rounded-md p-2 hover:cursor-pointer hover:bg-muted">
+                    <LogOut size={16} className="ml-1.5" />
+                    <p className="text-sm">
+                      Logout
+                    </p>
+                  </div>
+                </DropdownMenuItem>
+
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button asChild><Link to="/login"> <UserIcon className="w-5 h-5"></UserIcon> </Link></Button>
+          )}
         </header>
       </div>
     </>

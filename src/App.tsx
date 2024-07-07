@@ -20,6 +20,7 @@ import Diary from "./pages/diary/Diary";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import UsersProfile from "./pages/users/Users";
 import { Toaster } from "./components/ui/toaster";
+import WatchList from "./pages/watchlist/WatchList";
 
 function App() {
   return (
@@ -27,12 +28,13 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/diario" element={<Diary />} />
+            <Route path="/watchlist" element={<WatchList />} />
+          </Route>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<LoginPage />} />
-          <Route element={<ProtectedRoute />}>
-            <Route path="/diario" element={<Diary />} />
-          </Route>
           <Route path="filmes">
             <Route path="populares" element={<FilmesPopulares />} />
             <Route path="estreias" element={<FilmesEstreias />} />
