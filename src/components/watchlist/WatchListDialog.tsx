@@ -106,7 +106,7 @@ const WatchListDialog = ({ open, onClose, data }: any) => {
             </div>
 
             <div className="flex justify-end gap-4 max-lg:justify-between mt-auto">
-              <Button onClick={handleDelete} variant={'destructive'} className="mt-4">Remover</Button>
+              <Button onClick={handleDelete} variant={'destructive'} className="mt-4">Remover da lista</Button>
               <Button onClick={handleSave} className="mt-4">Adicionar ao diário</Button>
             </div>
 

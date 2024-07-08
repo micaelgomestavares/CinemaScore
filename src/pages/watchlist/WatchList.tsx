@@ -76,7 +76,7 @@ const WatchList: React.FC<{}> = () => {
           </Button>
         </div>
 
-        <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-5 max-lg:grid-cols-3 mt-4 max-lg:p-4">
+        <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-5 max-lg:grid-cols-2 mt-4 max-lg:p-4">
           {watchListData.map((item: any) => (
             <div onClick={() => handleDialogClick(item)} key={item.id} className="flex flex-col space-x-2 overflow-hidden hover:cursor-pointer shadow bg-secondary rounded-md">
               <div className="relative flex w-full items-center justify-center overflow-hidden bg-background/50">
