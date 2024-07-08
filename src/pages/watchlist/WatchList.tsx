@@ -109,7 +109,6 @@ const WatchList: React.FC<{}> = () => {
           onOpenChange={setOpenCommand}
           onSelect={handleCommandClick}
         />
-
         {selectedData && (
           <WatchListDialog
             open={openReview}

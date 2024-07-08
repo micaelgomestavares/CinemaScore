@@ -1,5 +1,5 @@
 import { Popcorn } from "lucide-react";
-import { Separator } from "./ui/separator";
+import { Separator } from "../ui/separator";
 
 export function Footer() {
   return (

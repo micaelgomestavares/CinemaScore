@@ -1,7 +1,6 @@
-import { ThemeProvider } from "./components/theme/theme-provider";
+import { ThemeProvider } from "./providers/theme-provider";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Navbar } from "./components/navbar/navbar";
-import { Footer } from "./components/footer";
 
 import Home from "./pages/Home";
 
@@ -21,6 +20,7 @@ import ProtectedRoute from "./pages/ProtectedRoute";
 import UsersProfile from "./pages/users/Users";
 import { Toaster } from "./components/ui/toaster";
 import WatchList from "./pages/watchlist/WatchList";
+import { Footer } from "./components/footer/footer";
 
 function App() {
   return (
