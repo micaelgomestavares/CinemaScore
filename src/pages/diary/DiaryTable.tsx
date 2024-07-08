@@ -49,6 +49,12 @@ export function DiaryTable() {
     fetchDiaryEntries();
   }, [user]);
 
+  useEffect(() => {
+    if (!isEditDialogOpen) {
+      setSelectedEntry(null);
+    }
+  }, [isEditDialogOpen]);
+
   const handleEditClick = (entry: any) => {
     setSelectedEntry(entry);
     setIsEditDialogOpen(true);
@@ -75,7 +81,6 @@ export function DiaryTable() {
     setIsDeleteDialogOpen(false);
   };
 
-
   return (
     <>
       <Table>
@@ -99,7 +104,7 @@ export function DiaryTable() {
               <TableCell>{renderStars(entry.rating.toString())}</TableCell>
               <TableCell>
                 <div className="flex flex-row max-lg:flex-col gap-2">
-                  <Button onClick={() => handleEditClick(entry)}><PenIcon className="w-5 h-5"></PenIcon></Button>
+                  <Button onClick={() => handleEditClick(entry)}><PenIcon className="w-5 h-5" /></Button>
                   <Button variant={'destructive'} onClick={() => handleDeleteClick(entry)}><Trash className="w-5 h-5"></Trash></Button>
                 </div>
               </TableCell>
@@ -107,6 +112,7 @@ export function DiaryTable() {
           ))}
         </TableBody>
       </Table>
+
       {selectedEntry && (
         <EditDialog
           open={isEditDialogOpen}
