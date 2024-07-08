@@ -270,18 +270,16 @@ export function Navbar() {
                         </span>
                       </AccordionTrigger>
                       <AccordionContent>
-                        <ul>
-                          <Link to={'/diario'} className="flex items-center gap-1.5 rounded-md p-2 hover:cursor-pointer hover:bg-muted w-full">
+                        <ul className="ml-4">
+                          <Link to={'/diario'} className="flex items-center gap-1.5 rounded-md p-3 hover:cursor-pointer hover:bg-muted w-full">
                             <NotebookPenIcon size={16} className="ml-1.5" />
                             <p className="text-sm"> Diário </p>
                           </Link>
-
-                          <Link to={'/watchlist'} className="flex items-center gap-1.5 rounded-md p-2 hover:cursor-pointer hover:bg-muted w-full">
+                          <Link to={'/watchlist'} className="flex items-center gap-1.5 rounded-md p-3 hover:cursor-pointer hover:bg-muted w-full">
                             <TvMinimal size={16} className="ml-1.5" />
                             <p className="text-sm"> Para assistir </p>
                           </Link>
-
-                          <a onClick={() => handleLogout()} className="flex items-center gap-1.5 rounded-md p-2 hover:cursor-pointer hover:bg-muted w-full">
+                          <a onClick={() => handleLogout()} className="flex items-center gap-1.5 rounded-md p-3 hover:cursor-pointer hover:bg-muted w-full">
                             <LogOut size={16} className="ml-1.5" />
                             <p className="text-sm"> Sair </p>
                           </a>
