@@ -90,9 +90,9 @@ const WatchListDialog = ({ open, onClose, data }: any) => {
 
             <div>
               <h1 className="mt-4 text-2xl font-bold">{data.title || data.name}
-                <span className="text-secondary-foreground text-sm ml-2">{new Date(data.release_date).toLocaleDateString('pt-BR') || new Date(data.first_air_date).toLocaleDateString('pt-BR')}</span>
+                <span className="text-xs text-muted-foreground ml-2">{new Date(data.release_date).toLocaleDateString('pt-BR') || new Date(data.first_air_date).toLocaleDateString('pt-BR')}</span>
               </h1>
-              <p className="text-secondary-foreground">{data.overview}</p>
+              <p className="text-sm text-muted-foreground">{data.overview}</p>
             </div>
 
             <div>
