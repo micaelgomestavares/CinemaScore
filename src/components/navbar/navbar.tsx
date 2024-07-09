@@ -121,15 +121,6 @@ export function Navbar() {
                     </NavigationMenuContent>
                   </NavigationMenuItem>
 
-                  {user && (
-                    <NavigationMenuItem>
-                      <NavigationMenuLink asChild>
-                        <Link className={navigationMenuTriggerStyle()} to="/diario">
-                          <NotebookPenIcon className="mr-2" size={16} strokeWidth={1.25} absoluteStrokeWidth /> Diário
-                        </Link>
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
-                  )}
                 </NavigationMenuList>
               </NavigationMenu>
             </div>
@@ -149,14 +140,14 @@ export function Navbar() {
                   <DropdownMenuContent className="w-[200px]">
 
                     <DropdownMenuItem>
-                      <Link to={'/diario'} className="flex items-center gap-1.5 rounded-md p-2 hover:cursor-pointer hover:bg-muted w-full">
+                      <Link to={'/diario'} className="flex items-center gap-1.5 rounded-md p-2 w-full">
                         <NotebookPenIcon size={16} className="ml-1.5" />
                         <p className="text-sm">Meu Diário</p>
                       </Link>
                     </DropdownMenuItem>
 
                     <DropdownMenuItem>
-                      <Link to={'/watchlist'} className="flex items-center gap-1.5 rounded-md p-2 hover:cursor-pointer hover:bg-muted w-full">
+                      <Link to={'/watchlist'} className="flex items-center gap-1.5 rounded-md p-2 w-full">
                         <TvMinimal size={16} className="ml-1.5" />
                         <p className="text-sm">Para assistir</p>
                       </Link>
@@ -166,10 +157,10 @@ export function Navbar() {
                       className=" cursor-pointer outline-none"
                       onClick={() => handleLogout()}
                     >
-                      <div className="flex items-center gap-1.5 rounded-md p-2 hover:cursor-pointer hover:bg-muted">
+                      <div className="flex items-center gap-1.5 rounded-md p-2">
                         <LogOut size={16} className="ml-1.5" />
                         <p className="text-sm">
-                          Logout
+                          Sair
                         </p>
                       </div>
                     </DropdownMenuItem>
