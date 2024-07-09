@@ -102,7 +102,7 @@ const SeriesInfoSection: React.FC<{ seriesInfo: SeriesInfo }> = ({ seriesInfo })
           ))}
           <Badge className="light:text-white" variant={'topEpisode'}>⭐ {seriesInfo.vote_average.toPrecision(2)}</Badge>
         </div>
-        <p className="text-xs leading-5 text-muted-foreground md:text-sm md:leading-6">{seriesInfo.overview}</p>
+        <p className="text-sm leading-5 text-muted-foreground md:leading-6">{seriesInfo.overview}</p>
       </article>
     </main>
   </section>
@@ -129,8 +129,8 @@ const CreditsTab: React.FC<{ credits: any, type: any }> = ({ credits, type }) =>
 const SimilarSeriesSection: React.FC<{ seriesRecommended: RecommendedSeries[] | null }> = ({ seriesRecommended }) => (
   <section className="mt-12 p-4">
     <div className="mb-4">
-      <h1 className="text-lg font-bold md:text-4xl">Recomendados</h1>
-      <p className="text-xs leading-5 text-muted-foreground md:text-sm md:leading-6">Outros usuários também assistiram</p>
+      <h1 className="text-4xl font-bold">Recomendados</h1>
+      <p className="text-sm leading-5 text-muted-foreground md:leading-6">Outros usuários também assistiram</p>
     </div>
     <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-5 max-lg:grid-cols-3 mt-4">
       {seriesRecommended?.map((serieRecommend) => (

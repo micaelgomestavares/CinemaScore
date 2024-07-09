@@ -94,7 +94,7 @@ const MovieInfoSection: React.FC<{ movieInfo: MovieInfo }> = ({ movieInfo }) => 
   <section className="mx-auto my-8 space-y-8 p-4">
     <main>
       <article className="flex w-full flex-col gap-3 ">
-        <h1 className="text-lg font-bold md:text-4xl">
+        <h1 className="text-4xl font-bold">
           {movieInfo.title} <span className="text-xs text-muted-foreground">({new Date(movieInfo.release_date).toLocaleDateString('pt-br')})</span>
         </h1>
         <div className="flex flex-wrap items-center gap-2">
@@ -103,7 +103,7 @@ const MovieInfoSection: React.FC<{ movieInfo: MovieInfo }> = ({ movieInfo }) => 
           ))}
           <Badge className="light:text-white" variant={'topEpisode'}>⭐ {movieInfo.vote_average.toPrecision(2)}</Badge>
         </div>
-        <p className="text-xs leading-5 text-muted-foreground md:text-sm md:leading-6">{movieInfo.overview}</p>
+        <p className="text-sm leading-5 text-muted-foreground md:leading-6">{movieInfo.overview}</p>
       </article>
     </main>
   </section>

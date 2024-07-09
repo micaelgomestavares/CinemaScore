@@ -3,8 +3,8 @@ import React from 'react';
 const SeriesList: React.FC<{ series: any[]; title: string; description: string }> = ({ series, title, description }) => (
   <section className="mt-4 p-4">
     <div className="mb-4">
-      <h1 className="text-lg font-bold md:text-4xl">{title}</h1>
-      <p className="text-xs leading-5 text-muted-foreground md:text-sm md:leading-6">{description}</p>
+      <h1 className="text-4xl font-bold">{title}</h1>
+      <p className="text-sm leading-5 text-muted-foreground md:leading-6">{description}</p>
     </div>
     <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-5 max-lg:grid-cols-3 mt-4">
       {series.map((serie) => (
